@@ -10,10 +10,17 @@ public class JobTest {
 
     Job emptyJobOne;
     Job emptyJobTwo;
+    Job equalJobOne;
+    Job equalJobTwo;
+    Job emptyFieldJob;
 
     @Before public void emptyJobs() {
         emptyJobOne = new Job();
         emptyJobTwo = new Job();
+        equalJobOne = new Job("QA Engineer", new Employer("Apple"), new Location("California"), new PositionType("Quality control"), new CoreCompetency("Very Thorough"));
+        equalJobTwo = new Job("QA Engineer", new Employer("Apple"), new Location("California"), new PositionType("Quality control"), new CoreCompetency("Very Thorough"));
+        emptyFieldJob = new Job("Jr Developer", new Employer(), new Location("California"), new PositionType("Quality control"), new CoreCompetency("Very Thorough"));
+
     }
 
     @Test
@@ -41,10 +48,29 @@ public class JobTest {
 
     @Test
     public void testJobsForEquality() {
-        Job equalJobOne = new Job("QA Engineer", new Employer("Apple"), new Location("California"), new PositionType("Quality control"), new CoreCompetency("Very Thorough"));
-        Job equalJobTwo = new Job("QA Engineer", new Employer("Apple"), new Location("California"), new PositionType("Quality control"), new CoreCompetency("Very Thorough"));
-
         assertFalse(equalJobOne.equals(equalJobTwo));
+    }
+
+    @Test
+    public void blankLineToString() {
+        assertEquals('\n',equalJobOne.toString().charAt(0));
+        assertEquals('\n', equalJobOne.toString().charAt(equalJobOne.toString().length()-1));
+    }
+
+    @Test
+    public void fieldLabelToString() {
+        assertTrue(equalJobOne.toString().contains("ID: "+equalJobOne.getId()));
+        assertTrue(equalJobOne.toString().contains("Name: "+equalJobOne.getName()));
+        assertTrue(equalJobOne.toString().contains("Employer: "+equalJobOne.getEmployer()));
+        assertTrue(equalJobOne.toString().contains("Location: "+equalJobOne.getLocation()));
+        assertTrue(equalJobOne.toString().contains("Position Type: "+equalJobOne.getPositionType()));
+        assertTrue(equalJobOne.toString().contains("Core Competency: "+equalJobOne.getCoreCompetency()));
+
+    }
+
+    @Test
+    public void blankFieldToString() {
+        assertTrue(emptyFieldJob.toString().contains("Data not available"));
     }
 
 

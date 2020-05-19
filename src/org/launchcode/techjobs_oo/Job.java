@@ -95,4 +95,42 @@ public class Job {
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
     }
+
+    public String emptyField(String methodReturn){
+        if(methodReturn == null) {
+            return "Data not available";
+        } else {
+            return methodReturn;
+        }
+    }
+
+    @Override
+    public String toString(){
+        String response = "\nID: " + this.getId() +
+                "\nName: " + this.getName() +
+                "\nEmployer: " + this.emptyField(this.getEmployer().getValue()) +
+                "\nLocation: " + this.emptyField(this.getLocation().getValue()) +
+                "\nPosition Type: " + this.emptyField(this.getPositionType().getValue()) +
+                "\nCore Competency: " + this.emptyField(this.getCoreCompetency().getValue()) + "\n";
+        return response;
+    }
+
+//    @Override
+//    public String toString() {
+//        if (this.getEmployer().getValue() == null){
+//            return "\nID: " + this.getId() +
+//                    "\nName: " + this.getName() +
+//                    "\nEmployer: Data not available" +
+//                    "\nLocation: " + this.getLocation() +
+//               "\nPosition Type: " + this.getPositionType() +
+//               "\nCore Competency: " + this.getCoreCompetency() + "\n";
+//        } else {
+//            return "\nID: " + this.getId() +
+//                    "\nName: " + this.getName() +
+//                    "\nEmployer: " + this.getEmployer() +
+//                    "\nLocation: " + this.getLocation() +
+//                    "\nPosition Type: " + this.getPositionType() +
+//                    "\nCore Competency: " + this.getCoreCompetency() + "\n";
+//        }
+//    }
 }
